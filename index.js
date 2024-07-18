@@ -90,7 +90,6 @@ function examClick(examId) {
         console.error('error: more than exam with this id')
     } else {
         localStorage.setItem('exam', JSON.stringify({"exams": exam[0]}))
-        parent.location.pathname = '/tosadsTest/examPage.html'
-
+        parent.location.pathname += 'examPage.html'
     }
 }
