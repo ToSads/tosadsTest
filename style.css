@@ -1,0 +1,74 @@
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    font-family: "Rubik", sans-serif;
+}
+
+body {
+    background-color: #525252;
+    color: white;
+    margin: 20px;
+}
+
+.MCQForm {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 50%;
+}
+
+.MCQQ {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.answers {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.answer {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    position: relative;
+}
+
+.checkBtn {
+    width: 100px;
+    height: 30;
+    transition: 0.04s;
+}
+.checkBtn:active {
+    scale: 1.02;
+}
+
+
+.testResult {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 30%;
+    direction: rtl;
+}
+
+.uncorrectList {
+    margin: 30px 0;
+    width: 30%;
+    direction: rtl;
+}
+.uncorrectList p {
+    margin: 10px 0;
+}
+
+
+#countdown {
+    font-size: 3em;
+    color: #f6f6f6;
+    border: 1px solid;
+    display: inline-block;
+    padding: 5px 10px;
+}

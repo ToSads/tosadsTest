@@ -1,0 +1,174 @@
+{
+    "exams": [
+        {
+            "name":"test",
+            "group": [2025],
+            "timeInMinutes": 1, 
+            "language": "Arabic",
+            "catagory":"Physics",
+            "id": "1",
+            "questions": {
+                "1":{
+                    "question": "this is a testing question 1",
+                    "answers": [
+                        {
+                            "text":"wrong 1",
+                            "value": false
+                        },{
+                            "text":"wrong 2",
+                            "value": false
+                        },{
+                            "text":"correct",
+                            "value": true
+                        }
+                    ]
+                },"2":{
+                    "question": "this is a testing question 2",
+                    "answers": [
+                        {
+                            "text":"correct",
+                            "value": true
+                        },{
+                            "text":"wrong 1",
+                            "value": false
+                        },{
+                            "text":"wrong 2",
+                            "value": false
+                        }
+                    ]
+                },"3":{
+                    "question": "this is a testing question 3",
+                    "answers": [
+                        {
+                            "text":"correct",
+                            "value": true
+                        },{
+                            "text":"wrong 1",
+                            "value": false
+                        },{
+                            "text":"wrong 2",
+                            "value": false
+                        },{
+                            "text":"wrong 3",
+                            "value": false
+                        }
+                    ]
+                }
+            }
+        },
+
+        {
+            "name":"test",
+            "group": [2024,2025],
+            "timeInMinutes": 1, 
+            "language": "English",
+            "catagory":"Biology",
+            "id": "2",
+            "questions": {
+                "1":{
+                    "question": "this is a testing question 1",
+                    "answers": [
+                        {
+                            "text":"wrong 1",
+                            "value": false
+                        },{
+                            "text":"wrong 2",
+                            "value": false
+                        },{
+                            "text":"correct",
+                            "value": true
+                        }
+                    ]
+                },"2":{
+                    "question": "this is a testing question 2",
+                    "answers": [
+                        {
+                            "text":"correct",
+                            "value": true
+                        },{
+                            "text":"wrong 1",
+                            "value": false
+                        },{
+                            "text":"wrong 2",
+                            "value": false
+                        }
+                    ]
+                },"3":{
+                    "question": "this is a testing question 3",
+                    "answers": [
+                        {
+                            "text":"correct",
+                            "value": true
+                        },{
+                            "text":"wrong 1",
+                            "value": false
+                        },{
+                            "text":"wrong 2",
+                            "value": false
+                        },{
+                            "text":"wrong 3",
+                            "value": false
+                        }
+                    ]
+                }
+            }
+        },
+
+
+        {
+            "name":"test 2",
+            "group": [2024, 2025],
+            "catagory":"English",
+            "timeInMinutes": 4, 
+            "id": "3",
+            "questions": {
+                "1":{
+                    "question": "this is a testing question",
+                    "answers": [
+                        {
+                            "text":"wrong 1",
+                            "value": false
+                        },{
+                            "text":"wrong 2",
+                            "value": false
+                        },{
+                            "text":"correct",
+                            "value": true
+                        }
+                    ]
+                },"2":{
+                    "question": "this is a testing question 2",
+                    "answers": [
+                        {
+                            "text":"correct",
+                            "value": true
+                        },{
+                            "text":"wrong 1",
+                            "value": false
+                        },{
+                            "text":"wrong 2",
+                            "value": false
+                        }
+                    ]
+                },"3":{
+                    "question": "this is a testing question 3",
+                    "answers": [
+                        {
+                            "text":"correct",
+                            "value": true
+                        },{
+                            "text":"wrong 1",
+                            "value": false
+                        },{
+                            "text":"wrong 2",
+                            "value": false
+                        },{
+                            "text":"wrong 3",
+                            "value": false
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
