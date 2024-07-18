@@ -131,11 +131,13 @@ async function checkAnswers() {
          
     /// see the questions didnt answer on it
     let mcqForm = Object.keys(document.querySelector('.firstMCQF').children)
+    console.log(mcqForm)
     mcqForm.pop()
+    mcqForm.shift()
     mcqForm.forEach(element=>{
-
-       if ((Object.keys(answers).indexOf(String(Number(element)+1))) == -1) {
-        console.log((Object.keys(answers).indexOf(Number(element)+1)))
+        console.log(mcqForm, element)
+       if ((Object.keys(answers).indexOf(element)) == -1) {
+        console.log((Object.keys(answers).indexOf(element)))
         answersResult.didntAnswerCount++
         let theQuestion = document.querySelector(`.firstMCQQ${element}`)
         console.log(element)
@@ -147,7 +149,7 @@ async function checkAnswers() {
         Object.keys(allAnswers).forEach((singleAnswer) =>{
             if (allAnswers[singleAnswer].className.split(' ').indexOf('answerC') != -1) { // get the correct answers
                 let correctAnswerNumber = allAnswers[singleAnswer].className.split(' ')[1][6] // get number of it 
-                let correctAnswerElement = document.querySelector(`.firstMCQQ${Number(element) +1} .answer${correctAnswerNumber}`)
+                let correctAnswerElement = document.querySelector(`.firstMCQQ${element} .answer${correctAnswerNumber}`)
                 theQuestionAnswer = (correctAnswerElement.textContent.trim()) // put only the text
             }
 
@@ -158,7 +160,7 @@ async function checkAnswers() {
                     wrongAnswerCorrect = (correctAnswerElement.textContent.trim()) // put only the text
                 } */
         })
-        answersResult.didntAnswer[Number(element) + 1] = {"question":theQuestionText, "correctAnswer": theQuestionAnswer}
+        answersResult.didntAnswer[element] = {"question":theQuestionText, "correctAnswer": theQuestionAnswer}
 
        }
     })
