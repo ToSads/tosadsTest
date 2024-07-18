@@ -166,5 +166,5 @@ async function checkAnswers() {
     console.log(answersResult)
     localStorage.setItem('result', JSON.stringify({"testInfo":{"name":"testing","catagory":"Biology","id":"1"},answersResult}))
 
-    parent.location.pathname = 'result.html'
+    parent.location.pathname = "/tosadsTest/result.html"
 }
