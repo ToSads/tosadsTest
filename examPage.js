@@ -192,7 +192,8 @@ async function checkAnswers() {
     })
 
     console.log(answersResult)
-    localStorage.setItem('result', JSON.stringify({"testInfo":{"name":"testing","catagory":"Biology","id":"1"},answersResult}))
+    /* ,"catagory":json['catagory'],"_id":json['_id'] */
+    localStorage.setItem('result', JSON.stringify({"testInfo":{"name":json['name']},answersResult}))
 
     parent.location.pathname = "/tosadsTest/result.html"
 }

@@ -3,6 +3,8 @@ let {testInfo, answersResult} = JSON.parse(localStorage.getItem('result'))
 console.log(testInfo)
 console.log(answersResult)
 
+document.querySelector('.exam-name').innerHTML = `اسم الاختبار: ${testInfo['name']}`
+
 let precentigResult = Math.floor((answersResult["correctCount"] / (answersResult["correctCount"] + answersResult["wrongCount"] + answersResult["didntAnswerCount"])) * 100)
 
 let testResult = document.querySelector('.testResult')
