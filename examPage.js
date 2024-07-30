@@ -2,14 +2,41 @@
 
 ////// fetch the exam needed and show 
 let json;
+let data;
+async function fetchData() {
+    const url = "https://tosadsapiglobal-production.up.railway.app/exams";
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+      data = await response.json();
+      console.log(data);
+      data.forEach(exam=>{
+        if (exam['_id'] == window.location.search.split('=')[1]) json = exam;
+      })
+      if (json) {
+        document.querySelector('.loading-screen').style = 'display:none;'
+        applyData()
+      } else {
+        let url = new URL(window.location.href);
+        url.pathname = 'tosadsTest';
+        url.searchParams.delete('_id');
+        let newUrl = url.toString();
+        window.location.href = newUrl;
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+}
+fetchData()
 let mcqForm = document.querySelector('.firstMCQF')
-async function fetchAndApplyData() {
-    let json = JSON.parse(localStorage.getItem('exam'))
+async function applyData() {
 
-    let questionsHTML = `<h1>${json["exams"]['name']}</h1>`;
+    let questionsHTML = `<h1>${json['name']}</h1>`;
     console.log(json)
-            Object.keys(json['exams']['questions']).forEach(element=> {
-                let theQuestion = json['exams']['questions'][element]
+            Object.keys(json['questions']).forEach(element=> {
+                let theQuestion = json['questions'][element]
                 questionsHTML += `
                     <div class="firstMCQQ${element} MCQQ">
                     <h3>${theQuestion['question']}</h3>
@@ -30,14 +57,13 @@ async function fetchAndApplyData() {
 
 
             })
-            startCountdown(json['exams']['timeInMinutes']);
+            startCountdown(json['timeInMinutes']);
 
         
 
     mcqForm.innerHTML = questionsHTML + '<button class="checkBtn" onclick="checkAnswers()">معرفة النتيجة</button>'
     
 }
-fetchAndApplyData()
 
 
 ///// Exam time

@@ -2,7 +2,7 @@
 let data;
 let catagoriesDiv = document.querySelector('.catagories')
 async function fetchAndApplyData() {
-    const url = "info.json";
+    const url = "https://tosadsapiglobal-production.up.railway.app/exams";
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -10,6 +10,7 @@ async function fetchAndApplyData() {
       }
       data = await response.json();
       console.log(data);
+      document.querySelector('.loading-screen').style = 'display:none;'
     } catch (error) {
       console.error(error.message);
     }
@@ -19,12 +20,12 @@ function putHTML() {
     catagoriesDiv.innerHTML = `
         <div onclick="catagoryClicked('Biology')" class="biologyDiv catagoryDiv">Biology - الاحياء</div>
         <div onclick="catagoryClicked('Physics')" class="physicsDiv catagoryDiv">Physics - الفيزياء</div>
-        <div onclick="catagoryClicked('Mathematics')" class="mathematicsDiv catagoryDiv">Mathematics - الرياضيات</div>
         <div onclick="catagoryClicked('Chemistry')" class="chemistryDiv catagoryDiv">Chemistry - الكيمياء</div>
         <div onclick="catagoryClicked('English')" class="englishDiv catagoryDiv">English - اللغة الانجليزية</div>
         <div onclick="catagoryClicked('French')" class="frenchDiv catagoryDiv">French  - اللغة الفرنسية</div>
         <div onclick="catagoryClicked('Islamic')" class="islamicDiv catagoryDiv">التربية الاسلامية</div>
-        <div onclick="catagoryClicked('Arabic')" class="arabicDiv catagoryDiv">اللغة العربية</div>
+        <div onclick="catagoryClicked('Literature')" class="literatureDiv catagoryDiv">ادب</div>
+        <div onclick="catagoryClicked('Grammar')" class="grammarDiv catagoryDiv">قواعد اللغة العربية</div>
     `
 }
 fetchAndApplyData()
@@ -63,15 +64,20 @@ function showGroups(subject, language) {
 }
 
 function showExams(subject, group, language) {
-    let filterdExams = data['exams'].filter(exam => {
-        return (exam['catagory'] == subject && exam['language'] == language && exam['group'].indexOf(Number(group)) != -1)
+    let filterdExams = data.filter(exam => {
+        if (subject == 'Biology' || subject == 'Physics' || subject == 'Chemistry') {
+            return (exam['catagory'] == subject && exam['language'] == language && exam['group'].indexOf(group) != -1)
+        } else {
+            console.log(subject + group)
+            return (exam['catagory'] == subject && exam['group'].indexOf(group) != -1)
+        }
     })
     console.log(filterdExams)
     catagoriesDiv.innerHTML = '<button onclick="putHTML()">الرجوع</button>'
     if (filterdExams.length > 0) {
         for (let i in filterdExams) {
             catagoriesDiv.innerHTML += `
-                <div onclick="examClick(${filterdExams[i]['id']})" class="catagoryDiv">${filterdExams[i]['name']} | الوقت بالدقائق: ${filterdExams[i]['timeInMinutes']}</div>
+                <div onclick="examClick('${filterdExams[i]['_id']}')" class="catagoryDiv">${filterdExams[i]['name']} | الوقت بالدقائق: ${filterdExams[i]['timeInMinutes']}</div>
             `
 
         }
@@ -84,12 +90,15 @@ function showExams(subject, group, language) {
 }
 
 function examClick(examId) {
-    console.log(data['exams'])
-    let exam = data['exams'].filter(id => id['id'] == examId)
+    console.log(data)
+    let exam = data.filter(id => id['_id'] == examId)
     if (exam.length > 1) {
         console.error('error: more than exam with this id')
     } else {
-        localStorage.setItem('exam', JSON.stringify({"exams": exam[0]}))
-        parent.location.pathname += 'examPage.html'
+        let url = new URL(window.location.href);
+        url.pathname = 'tosadsTest/examPage.html';
+        url.searchParams.set('_id', examId);
+        let newUrl = url.toString();
+        window.location.href = newUrl;
     }
 }
