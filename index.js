@@ -1,6 +1,11 @@
 
 let data;
 let catagoriesDiv = document.querySelector('.catagories')
+if (!localStorage.getItem('reload') || localStorage.getItem('reload') >= 5) {
+    localStorage.setItem('reload',0)
+}
+
+
 async function fetchAndApplyData() {
     const url = "https://tosadsapiglobal-production.up.railway.app/exams";
     try {
@@ -11,21 +16,64 @@ async function fetchAndApplyData() {
       data = await response.json();
       console.log(data);
       document.querySelector('.loading-screen').style = 'display:none;'
+      localStorage.setItem('reload',0)
     } catch (error) {
-      console.error(error.message);
+      localStorage.setItem('reload', Number(localStorage.getItem('reload')) + 1)
+      if (localStorage.getItem('reload') < 5) {
+        console.error(error.message);
+        location.reload()
+      }  else {
+        let url = new URL(window.location.href);
+        url.pathname = 'tosadsTest/error.html';
+        let newUrl = url.toString();
+        window.location.href = newUrl;
+      }
+
     }
     putHTML()
 }
 function putHTML() {
     catagoriesDiv.innerHTML = `
-        <div onclick="catagoryClicked('Biology')" class="biologyDiv catagoryDiv">Biology - الاحياء</div>
-        <div onclick="catagoryClicked('Physics')" class="physicsDiv catagoryDiv">Physics - الفيزياء</div>
-        <div onclick="catagoryClicked('Chemistry')" class="chemistryDiv catagoryDiv">Chemistry - الكيمياء</div>
-        <div onclick="catagoryClicked('English')" class="englishDiv catagoryDiv">English - اللغة الانجليزية</div>
-        <div onclick="catagoryClicked('French')" class="frenchDiv catagoryDiv">French  - اللغة الفرنسية</div>
-        <div onclick="catagoryClicked('Islamic')" class="islamicDiv catagoryDiv">التربية الاسلامية</div>
-        <div onclick="catagoryClicked('Literature')" class="literatureDiv catagoryDiv">ادب</div>
-        <div onclick="catagoryClicked('Grammar')" class="grammarDiv catagoryDiv">قواعد اللغة العربية</div>
+        <div onclick="catagoryClicked('Biology')" class="biologyDiv catagoryDiv">
+        <iconify-icon icon="material-symbols-light:microbiology" width="65" height="65"  style="color: white"></iconify-icon>
+        <p>الاحياء</p>
+        </div>
+
+        <div onclick="catagoryClicked('Physics')" class="physicsDiv catagoryDiv">
+        <iconify-icon icon="hugeicons:physics" width="65" height="65"  style="color: white"></iconify-icon>
+        <p>الفيزياء</p>
+        </div>
+
+        <div onclick="catagoryClicked('Chemistry')" class="chemistryDiv catagoryDiv">
+        <iconify-icon icon="healthicons:biochemistry-laboratory" width="65" height="65"  style="color: white"></iconify-icon>
+        <p>الكيمياء</p>
+        </div>
+
+        <div onclick="catagoryClicked('English')" class="englishDiv catagoryDiv">
+        <iconify-icon icon="icon-park-solid:english" width="65" height="65"  style="color: white"></iconify-icon>
+        <p>اللغة الانجليزية</p>
+        </div>
+
+        <div onclick="catagoryClicked('French')" class="frenchDiv catagoryDiv">
+        <iconify-icon icon="mdi:france" width="65" height="65"  style="color: white"></iconify-icon>
+        <p>اللغة الفرنسية</p>
+        </div>
+
+        <div onclick="catagoryClicked('Islamic')" class="islamicDiv catagoryDiv">
+        <iconify-icon icon="mdi:religion-islamic" width="65" height="65"  style="color: white"></iconify-icon>
+        <p>التربية الاسلامية</p>
+        </div>
+
+        <div onclick="catagoryClicked('Literature')" class="literatureDiv catagoryDiv">
+        <iconify-icon icon="game-icons:archive-research" width="65" height="65"  style="color: white"></iconify-icon>
+        <p>ادب</p>
+        </div>
+
+        <div onclick="catagoryClicked('Grammar')" class="grammarDiv catagoryDiv">
+        <iconify-icon icon="fluent:text-grammar-checkmark-24-regular" width="65" height="65"  style="color: white"></iconify-icon>
+        <p>قواعد اللغة العربية</p>
+        </div>
+
     `
 }
 fetchAndApplyData()
@@ -40,8 +88,11 @@ function catagoryClicked(subject) {
 
 function showLanguages(subject) {
     catagoriesDiv.innerHTML = `
-        <button onclick="putHTML()">الرجوع</button>
+        <button class="homeBtn" onclick="putHTML()">
+        <iconify-icon icon="mdi:home" width="34" height="34"  style="color: white"></iconify-icon>
+        </button>
         <div onclick="showGroups('${subject}', 'English')" class="catagoryDiv">منهج انجليزي</div>
+        
         <div onclick="showGroups('${subject}', 'Arabic')" class="catagoryDiv">منهج عربي</div>
     `
 }
@@ -49,13 +100,17 @@ function showLanguages(subject) {
 function showGroups(subject, language) {
     if (language) {
         catagoriesDiv.innerHTML = `
-            <button onclick="putHTML()">الرجوع</button>
+            <button class="homeBtn" onclick="putHTML()">
+            <iconify-icon icon="mdi:home" width="34" height="34"  style="color: white"></iconify-icon>
+            </button>
             <div onclick="showExams('${subject}', '2025','${language}')" class="catagoryDiv">دفعة 2025</div>
             <div onclick="showExams('${subject}', '2024','${language}')" class="catagoryDiv">دفعة 2024</div>
         `
     } else {
         catagoriesDiv.innerHTML = `
-            <button onclick="putHTML()">الرجوع</button>
+            <button class="homeBtn" onclick="putHTML()">
+            <iconify-icon icon="mdi:home" width="34" height="34"  style="color: white"></iconify-icon>
+            </button>
             <div onclick="showExams('${subject}', '2025')" class="catagoryDiv">دفعة 2025</div>
             <div onclick="showExams('${subject}', '2024')" class="catagoryDiv">دفعة 2024</div>
         `
@@ -73,17 +128,32 @@ function showExams(subject, group, language) {
         }
     })
     console.log(filterdExams)
-    catagoriesDiv.innerHTML = '<button onclick="putHTML()">الرجوع</button>'
+    catagoriesDiv.innerHTML = `<button class="homeBtn" onclick="putHTML()">
+    <iconify-icon icon="mdi:home" width="34" height="34"  style="color: white"></iconify-icon>
+    </button>`
     if (filterdExams.length > 0) {
         for (let i in filterdExams) {
             catagoriesDiv.innerHTML += `
-                <div onclick="examClick('${filterdExams[i]['_id']}')" class="catagoryDiv">${filterdExams[i]['name']} | الوقت بالدقائق: ${filterdExams[i]['timeInMinutes']}</div>
+                <div onclick="examClick('${filterdExams[i]['_id']}')" class="examDiv">
+                    <p>
+                        <iconify-icon icon="mdi:rename" width="25" height="25"  style="color: white"></iconify-icon>
+
+                        ${filterdExams[i]['name']} 
+                        </p>
+                    <p>
+                        <iconify-icon icon="carbon:time-filled" width="25" height="25"  style="color: white"></iconify-icon>
+
+                        ${filterdExams[i]['timeInMinutes']} دقيقة 
+                    </p>
+                 </div>
             `
 
         }
     } else {
         catagoriesDiv.innerHTML = `
-        <button onclick="putHTML()">الرجوع</button>
+        <button class="homeBtn" onclick="putHTML()">
+        <iconify-icon icon="mdi:home" width="34" height="34"  style="color: white"></iconify-icon>
+        </button>
         <p>لايوجد اختبارات</p>
         `
     }

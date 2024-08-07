@@ -1,13 +1,28 @@
-*, *::after, *::before {
+@font-face {
+    font-family: VIPArabicTypo;
+    src: url(media/fonts/VIPArabicTypo.otf);
+}
+@font-face {
+    font-family: comfotaa;
+    src: url(media/fonts/Comfortaa-VariableFont_wght.ttf);
+}
+
+* {
     margin: 0;
     padding: 0;
-    font-family: "Rubik", sans-serif;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
-    background-color: #525252;
     color: white;
-    margin: 20px;
+    width:100%;
+    height: 100%;
+    padding-bottom: 300px;
+    overflow-x: hidden;
+    background-color: #2a1c19;
+    font-family: "Rubik", sans-serif;
+    position: relative;
 }
 
 .loading-screen {
@@ -17,14 +32,29 @@ body {
     right: 0;
     bottom: 0;
     background-color: rgb(39, 39, 39);
+    z-index: 100;
+}
+.loading-screen-group {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    translate: -50% -50%;
+
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-family: "Rubik", sans-serif;
+    font-weight: bold;
 }
-.loading-screen img {
-    max-width: 20%;
+
+.loading-screen-group img {
+    width: 14rem;
     animation: 2.8s infinite linear rotate;
+}
+
+.loading-screen-group h3 {
+    display: inline-block;
 }
 
 @keyframes rotate {
@@ -32,24 +62,333 @@ body {
     100% {rotate: 359deg;}
 }
 
+/* Moving text animation */
+.moving-text-container {
+    position: relative;
+}
+.moving-text-container span {
+    position: relative;
+    display: inline-block;
+    color: white;
+    animation: movingText 1s infinite;
+    animation-delay: calc(0.1s*var(--i));
+}
+
+@keyframes movingText {
+    0%, 40%, 100% {
+        transform: translateY(0);
+    }
+    20% {
+        transform: translateY(-20px);
+    }
+}
+
+/* navbar */
+.main-navbar {
+    position:fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 65px;
+    background-color: black;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar-left-side {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+/* logo */
+.navbar-left-side img { 
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    width: 10rem;
+}
+/* tosads h3 */
+.navbar-left-side h3 {
+    margin-left: 13rem;
+    font-family: VIPArabicTypo, sans-serif;
+    font-weight: 400;
+    font-size: 1.7rem;
+    position: relative;
+}
+
+.forexams {
+    font-size: 0.7rem;
+    position: absolute;
+    bottom: -0.8rem;
+    left: -1.7rem;
+    color: white;
+    text-shadow: 0px 0px 4px #57abb5;
+}
+
+.navbar-right-side {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+    margin-right: 2rem;
+}
+.navbar-right-side a {
+    text-decoration: none;
+    color: black;
+    font-family: VIPArabicTypo, sans-serif;
+    background-color: white;
+    padding: 3px 7px;
+    border-radius: 20px;
+    transition: 0.15s;
+}
+
+.navbar-right-side a:hover {
+    background-color: rgb(181, 181, 181);
+}
+
+.mainCatagoriesDiv {
+    background-image: url(media/images/backgrounds/blackBGBlur.png);
+    background-position: center;
+    background-size:cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    margin-top: 65px;
+    mask-image: linear-gradient(black 90%, transparent);
+    -webkit-mask-image: linear-gradient(black 90%, transparent);
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+}
 
 .catagories {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 30%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    margin: 2rem;
 }
 
 .catagoryDiv {
-    background-color: white;
-    color: black;
-    display: inline-block;
-    max-width: 200px;
+    background-color: #377279;
+    color: white;
+    width: 11rem;
+    height: 11rem;
     padding: 10px;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 15px;
     transition: 0.15s;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-around;
+    font-weight: bold;
+    font-size: 1.3rem;
+    border-bottom: 6px solid #265154;
+    border-left: 6px solid #265154;
+    border-right: 6px solid #265154;
+    border-top: 6px solid #45929a;
+    cursor: pointer;
 }
-.catagoriesDiv:hover {
-    background-color: rgb(228, 228, 228);
+.catagoryDiv:hover {
+    background-color: #45929a;
+}
+
+.homeBtn {
+    background-color: transparent;
+    border: none;
+    border-radius: 100%;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.examDiv {
+    background-color: #377279;
+    color: white;
+    padding: 10px;
+    max-width: 13rem;
+    text-align: end;
+    border-radius: 15px;
+    transition: 0.15s;
+    display: flex;
+    flex-direction: column;
+    align-items:start;
+    justify-content: space-around;
+    direction: rtl;
+    font-weight: 500;
+    font-size: 1.3rem;
+    gap: 1rem;
+    border-bottom: 6px solid #265154;
+    border-left: 6px solid #265154;
+    border-right: 6px solid #265154;
+    border-top: 6px solid #45929a;
+    cursor: pointer;
+}
+.examDiv:hover {
+    background-color: #45929a;
+}
+.examDiv p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-wrap: wrap;
+    text-align: start;
+}
+
+#aboutus {
+    text-align: center;
+    font-size: large;
+    direction: rtl;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    margin-top: 8rem;
+    line-height: 150%;
+    position: relative;
+    background-color: #3b2520;
+    padding: 20px 0;
+    text-shadow: 0 0 5px #377279;
+}
+
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+#aboutus::after, #aboutus::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: conic-gradient(from var(--angle), #377279, white,#377279);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    padding: 4px;
+    animation: 5s spin linear infinite
+}
+
+#aboutus::before {
+    filter: blur(1.5rem);
+    opacity: 0.7;
+}
+
+
+@keyframes spin {
+    from {
+        --angle: 0deg;
+    } to {
+        --angle: 360deg;
+    }
+}
+
+#aboutus a {
+    color: white;
+}
+
+
+footer {
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+}
+footer a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+@media (max-width: 650px) {
+
+
+
+    .mainCatagoriesDiv {
+        background: #2a1c19;
+        background-position: center;
+        background-size:cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;    
+        min-height: 100vh;
+        margin-top: 65px;
+        mask-image: linear-gradient(black 90%, transparent);
+        -webkit-mask-image: linear-gradient(black 90%, transparent);
+    }
+    
+    .catagories {
+        margin: 1.5rem;
+        
+    }
+    .catagoryDiv {
+        width: 6.9rem;
+        height:6.9rem;
+        font-size: 0.8rem;
+    }
+    
+
+    .main-navbar {
+        position: static;
+        margin: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+        gap: 1.4rem;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 0px white;
+        background-image: url(media/images/backgrounds/blackBGBlur.png);
+        background-position: 0px 60%;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .navbar-left-side {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        gap: 2rem;
+        color: white;
+    }
+    .navbar-left-side img {
+        position: static;
+        top: 0px;
+        left: 0px;
+        width: 8rem;
+    }
+
+    .navbar-left-side h3 {
+        margin-left: 0;
+        font-family: VIPArabicTypo, sans-serif;
+        font-weight: 400;
+        font-size: 1.4rem;
+        text-align: end;
+    }
+
+    .navbar-right-side {
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+
+    }
+
 }

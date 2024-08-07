@@ -14,12 +14,29 @@
 </head>
 <body>
     <div class="loading-screen">
-        <img src="img2.png" alt="Loading...">
-        <h3>loading....</h3>
+        <div class="loading-screen-group">
+            <img src="media/images/icons/loading.png" alt="Loading...">
+            <div class="moving-text-container">
+                <span style="--i:1">T</span>
+                <span style="--i:2">O</span>
+                <span style="--i:3">S</span>
+                <span style="--i:4">A</span>
+                <span style="--i:5">D</span>
+                <span style="--i:6">S</span>
+                <span style="--i:7">.</span>
+                <span style="--i:8">.</span>
+                <span style="--i:9">.</span>
+            </div>
+        </div>
     </div>
-    <div id="countdown"></div>
-    <a href="index.html">الرجوع الى القائمة الرئيسية</a>
 
+    
+    <div id="countdown">00<span class="seperator"><p>.</p><p>.</p></span>00</div>
+    <a href="index.html" class="homeBtn">
+        <iconify-icon icon="mdi:home" width="34" height="34"  style="color: white"></iconify-icon>
+    </a>
+    <div class="pens">
+    </div>
     <div class="firstMCQF MCQForm">
          <h1 hidden>HaidarKhalid - ToSads Team ©</h1>
         <!-- <div class="firstMCQQ1 MCQQ">
@@ -70,6 +87,8 @@
         <button class="checkBtn" onclick="checkAnswers()">معرفة النتيجة</button>
  -->
     </div>
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
 </body>
 </html>
 
